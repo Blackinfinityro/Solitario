@@ -17,6 +17,7 @@ def eng():
     print("(4) Deck to Foundation: R0 D0 R0 F1")
     print("(5) Tableau to Foundation: R7 T1 R0 F1 (supports 1 card only)")
     print("(6) Quit: quit")
+    print("(7) Reset: reset")
     print()
     print(game)
 
@@ -27,6 +28,10 @@ def eng():
         if (command == 'quit'):
             print("See you next time!")
             break
+
+        if (command == 'reset'):
+            print("The game has been reset.")
+            main()
 
         result = False
         try:
@@ -52,6 +57,7 @@ def ita():
     print("(4) Mazzo a Finale: R0 D0 R0 F1")
     print("(5) Tabella a Finale: R7 T1 R0 F1 (supporta solo 1 carta)")
     print("(6) Esci: esci")
+    print("(7) Reset: reset")
     print()
     print(game)
 
@@ -63,6 +69,10 @@ def ita():
             print("A presto!")
             break
 
+        if (command == 'reset'):
+            print("Il gioco è stato resettato.")
+            main()
+
         result = False
         try:
             result = game.move(command)
@@ -72,9 +82,12 @@ def ita():
         if result:
             print(game)
 
-if __name__ == "__main__":
-    language = input("Choose language/Scegli la lingua (eng/ita): ").strip().lower()
-    if language == 'ita':
-        ita()
-    elif language == 'eng':
-        eng()
+def main():
+    if __name__ == "__main__":
+        language = input("Choose language/Scegli la lingua (eng/ita): ").strip().lower()
+        if language == 'ita':
+            ita()
+        elif language == 'eng':
+            eng()
+
+main()

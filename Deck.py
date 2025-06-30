@@ -16,6 +16,8 @@ class Deck(Card_Stack):
                 self.cards.append(c)
 
         self.shuffle()
+        self.pointer = 0
+        self.discarded = []  # cards discarded (played from deck) / carte scartate (giocate dal mazzo)
 
         # pointer = index to only 1 "viewable" card in deck during game / pointer = indice per l'unica carta "visibile" nel mazzo durante il gioco
         self.pointer = 0
@@ -39,6 +41,10 @@ class Deck(Card_Stack):
 
     # Increment pointer: need new viewable card / Incrementa il puntatore: è necessaria una nuova carta visibile
     def increment(self):
+        if not self.cards:
+            print("♻️ Mazzo vuoto. Rimescolo le carte scartate...")
+            self.rebuild_deck()
+
         # hide old card / nascondi la vecchia carta
         self.cards[self.pointer].hide()
 
@@ -49,9 +55,27 @@ class Deck(Card_Stack):
         # show new card / mostra la nuova carta
         self.cards[self.pointer].show()
 
+    # Rebuild deck from discarded cards / Ricostruisci il mazzo dalle carte scartate
+    def rebuild_deck(self):
+        if not self.discarded:
+            print("❌ Nessuna carta da rimescolare.")
+            return
+
+        self.cards = self.discarded
+        self.discarded = []
+        self.shuffle()
+        self.pointer = 0
+        self.cards[self.pointer].show()
+
     # Remove "viewable" element from deck / Rimuovi l'elemento "visibile" dal mazzo
     def pop(self):
+        if not self.cards:
+            print("♻️ Mazzo vuoto. Rimescolo le carte scartate...")
+            self.rebuild_deck()
+
         answer = self.cards[self.pointer]
+
+        self.discarded.append(answer)
 
         # Delete from deck array, make new "top" visible / Elimina dall'array del mazzo, rendi visibile il nuovo "top"
         # Note that self.pointer index doesn't change / Nota che l'indice self.pointer non cambia
