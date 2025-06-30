@@ -1,9 +1,8 @@
-# Simple Solitaire Game
-
-# Import Dependencies
+# Import Dependencies / Importa le dipendenze
 from Game import Game
 
-# Play Solitaire!
+# Play Solitaire! / Gioca a Solitario!
+# English Version / Versione Inglese
 def eng():
     game = Game()
     print("Welcome to Solitaire: Good Luck!")
@@ -38,6 +37,7 @@ def eng():
         if result:
             print(game)
 
+# Italian Version / Versione Italiana
 def ita():
     game = Game()
     print("Benvenuto al solitario: Buona fortuna!")
@@ -47,10 +47,10 @@ def ita():
     print()
     print("Movimento ed Esempi")
     print("(1) Nuova Carta Mazzo: R0 D0 R0 D0")
-    print("(2) Mazzo a Tavolo: R0 D0 R8 T1")
-    print("(3) Tavolo a Tavolo: R7 T1 R7 T2 (supporta più carte)")
-    print("(4) Mazzo a Fondazione: R0 D0 R0 F1")
-    print("(5) Tavolo a Fondazione: R7 T1 R0 F1 (supporta solo 1 carta)")
+    print("(2) Mazzo a Tabella: R0 D0 R8 T1")
+    print("(3) Tabella a Tabella: R7 T1 R7 T2 (supporta più carte)")
+    print("(4) Mazzo a Finale: R0 D0 R0 F1")
+    print("(5) Tabella a Finale: R7 T1 R0 F1 (supporta solo 1 carta)")
     print("(6) Esci: esci")
     print()
     print(game)

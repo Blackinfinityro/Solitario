@@ -1,59 +1,60 @@
-# Import Dependencies
+# Import Dependencies / Importa le dipendenze
 from Card_Stack import Card_Stack
 from Card import Card
 from random import randint
 
-# Deck Class
+# Deck Class / # Classe Mazzo
 class Deck(Card_Stack):
     def __init__(self):
         Card_Stack.__init__(self)
 
         # create 52 cards (4/rank) and add to Deck
-        for i in range(0, 4):
+        suits = ['hearts', 'diamonds', 'spades', 'clubs']
+        for suit in suits:
             for r in range(1, 14):
-                c = Card(r)
+                c = Card(r, suit)
                 self.cards.append(c)
 
         self.shuffle()
 
-        # pointer = index to only 1 "viewable" card in deck during game
+        # pointer = index to only 1 "viewable" card in deck during game / pointer = indice per l'unica carta "visibile" nel mazzo durante il gioco
         self.pointer = 0
 
-    # Shuffle Deck
+    # Shuffle Deck / Mischia il mazzo
     def shuffle(self):
-        # starting from last element, randomly swap 1 by 1
-        # first element will be swapped by default
+        # starting from last element, randomly swap 1 by 1 / iniziare dall'ultimo elemento, scambiare casualmente 1 alla volta
+        # first element will be swapped by default / il primo elemento sarà scambiato per impostazione predefinita
         for i in range(len(self.cards)-1, 0, -1):
-            # pick a random index from 0 to i
+            # pick a random index from 0 to i / scegliere un indice casuale da 0 a i
             j = randint(0, i)
 
-            # swap arr[i] with arr[j]
+            # swap arr[i] with arr[j] / scambia arr[i] con arr[j]
             self.cards[i],self.cards[j] = self.cards[j],self.cards[i]
 
-    # Note: No add function -- can't add elements to deck (only remove, 1 at a time)
+    # Note: No add function -- can't add elements to deck (only remove, 1 at a time) / Note: Nessuna funzione di aggiunta -- non è possibile aggiungere elementi al mazzo (solo rimuovere, 1 alla volta)
 
-    # Current "viewable" element in Deck
+    # Current "viewable" element in Deck / Elemento "visibile" corrente nel mazzo
     def top(self):
         return self.cards[self.pointer]
 
-    # Increment pointer: need new viewable card
+    # Increment pointer: need new viewable card / Incrementa il puntatore: è necessaria una nuova carta visibile
     def increment(self):
-        # hide old card
+        # hide old card / nascondi la vecchia carta
         self.cards[self.pointer].hide()
 
         self.pointer += 1
         if (self.pointer >= len(self)):
             self.pointer = 0
 
-        # show new card
+        # show new card / mostra la nuova carta
         self.cards[self.pointer].show()
 
-    # Remove "viewable" element from deck
+    # Remove "viewable" element from deck / Rimuovi l'elemento "visibile" dal mazzo
     def pop(self):
         answer = self.cards[self.pointer]
 
-        # Delete from deck array, make new "top" visible
-        # Note that self.pointer index doesn't change
+        # Delete from deck array, make new "top" visible / Elimina dall'array del mazzo, rendi visibile il nuovo "top"
+        # Note that self.pointer index doesn't change / Nota che l'indice self.pointer non cambia
         del self.cards[self.pointer]
         self.cards[self.pointer].show()
 
